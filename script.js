@@ -29,17 +29,35 @@ function playRound(humanChoice, computerChoice){
     if((humanChoice === "rock" && computerChoice === "scissors") ||
     (humanChoice === "paper" && computerChoice === "rock") ||
     (humanChoice === "scissors" && computerChoice === "paper")){
-        humanScore++;
         console.log(`you win! ${humanChoice} beats ${computerChoice}`);
+        return true;
+    } else if((humanChoice === computerChoice)){
+        console.log(`${humanChoice} and ${computerChoice} is a draw!`);
+        return null;
     } else {
-        computerScore++;
         console.log(`you lose! ${computerChoice} beats ${humanChoice}`);
+        return false;
     }
 }
 
-let humanScore = 0;
-let computerScore = 0;
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
-playRound(humanChoice, computerChoice);
+    while ((humanScore < 3) && (computerScore < 3)){
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        const result = playRound(humanChoice, computerChoice)
+        if(result === true){
+            humanScore++;
+        } else if (result === null){
+            //draw condition
+        } else {
+            computerScore++;
+        }
+        console.log(humanScore);
+        console.log(computerScore);
+    }
+}
+
+playGame();
